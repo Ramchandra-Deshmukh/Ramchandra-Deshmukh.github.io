@@ -1,958 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Ramchandra Deshmukh | System Administrator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet"/>
-  <style>
-    /* ===== ROOT ===== */
-    :root {
-      --teal:    #00f5d4;
-      --orange:  #ff6b35;
-      --magenta: #f72585;
-      --lime:    #b5e853;
-      --blue:    #4cc9f0;
-      --purple:  #7209b7;
-      --bg:      #080c14;
-      --glass:   rgba(255,255,255,0.04);
-      --glass-border: rgba(255,255,255,0.10);
-      --text:    #f0f4f8;
-      --muted:   #8899aa;
-      --font-display: 'Syne', sans-serif;
-      --font-mono:    'DM Mono', monospace;
-      --font-body:    'Nunito', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; }
+<title>Ramchandra Deshmukh | System Administrator</title>
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      overflow-x: hidden;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400;500&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 
-    /* ===== ANIMATED AURORA BG ===== */
-    .aurora {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .aurora-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.18;
-      animation: drift 12s ease-in-out infinite alternate;
-    }
-    .aurora-blob:nth-child(1){ width:600px;height:600px;background:var(--teal);   top:-10%;left:-10%;  animation-duration:14s;}
-    .aurora-blob:nth-child(2){ width:500px;height:500px;background:var(--magenta);top:20%; right:-5%; animation-duration:11s; animation-delay:-3s;}
-    .aurora-blob:nth-child(3){ width:700px;height:400px;background:var(--blue);   bottom:0; left:30%;  animation-duration:16s; animation-delay:-6s;}
-    .aurora-blob:nth-child(4){ width:350px;height:350px;background:var(--orange); bottom:20%;left:-5%; animation-duration:10s; animation-delay:-2s;}
-    .aurora-blob:nth-child(5){ width:300px;height:300px;background:var(--lime);   top:50%;  right:10%; animation-duration:13s; animation-delay:-8s;}
+<style>
 
-    @keyframes drift {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(40px,30px) scale(1.1); }
-    }
+/* ================= ROOT ================= */
 
-    /* ===== NOISE OVERLAY ===== */
-    body::after {
-      content:'';
-      position:fixed;
-      inset:0;
-      z-index:1;
-      pointer-events:none;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      opacity: 0.4;
-    }
+:root {
+  --teal:#00f5d4;
+  --blue:#4cc9f0;
+  --magenta:#f72585;
+  --orange:#ff6b35;
+  --lime:#b5e853;
+  --purple:#7209b7;
 
-    /* ===== NAVBAR ===== */
-    nav {
-      position: fixed;
-      top: 0; left:0; right:0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(8,12,20,0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--glass-border);
-    }
-    .logo {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 1.3rem;
-      background: linear-gradient(90deg, var(--teal), var(--magenta));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      letter-spacing: -1px;
-    }
-    .nav-links { display:flex; gap:28px; list-style:none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.3s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content:'';
-      position:absolute; bottom:-4px; left:0; right:0;
-      height:2px;
-      background: linear-gradient(90deg, var(--teal), var(--magenta));
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    .nav-links a:hover { color:#fff; }
-    .nav-links a:hover::after { transform: scaleX(1); }
-    .hamburger { display:none; cursor:pointer; color:var(--teal); font-size:1.5rem; }
+  --bg:#080c14;
+  --glass:rgba(255,255,255,0.05);
+  --glass-border:rgba(255,255,255,0.12);
 
-    /* ===== WRAPPER ===== */
-    .page { position:relative; z-index:2; }
+  --text:#f0f4f8;
+  --muted:#8a98a8;
 
-    /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 48px 80px;
-      gap: 60px;
-      position: relative;
-    }
+  --font-display:'Syne',sans-serif;
+  --font-body:'Nunito',sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
 
-    .hero-left { flex:1; max-width:600px; }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    .badge-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 0.3s;
-    }
-    .badge {
-      padding: 5px 14px;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 1px;
-      border: 1px solid;
-    }
-    .badge-teal    { color:var(--teal);    border-color:var(--teal);    background:rgba(0,245,212,0.08);}
-    .badge-orange  { color:var(--orange);  border-color:var(--orange);  background:rgba(255,107,53,0.08);}
-    .badge-magenta { color:var(--magenta); border-color:var(--magenta); background:rgba(247,37,133,0.08);}
+body{
+background:var(--bg);
+color:var(--text);
+font-family:var(--font-body);
+overflow-x:hidden;
+}
 
-    .hero-name {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.0;
-      letter-spacing: -3px;
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 0.5s;
-    }
-    .hero-name .line1 { color: #fff; display:block; }
-    .hero-name .line2 {
-      display: block;
-      background: linear-gradient(90deg, var(--teal) 0%, var(--blue) 40%, var(--magenta) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
 
-    .hero-role {
-      font-family: var(--font-mono);
-      color: var(--orange);
-      font-size: 1rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin: 20px 0 16px;
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 0.7s;
-    }
+/* ================= NAVBAR ================= */
 
-    .hero-bio {
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.8;
-      max-width: 480px;
-      margin-bottom: 36px;
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 0.85s;
-    }
+nav{
 
-    .cta-group {
-      display:flex; gap:16px; flex-wrap:wrap;
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 1s;
-    }
-    .cta-primary {
-      background: linear-gradient(135deg, var(--teal), var(--blue));
-      color: #000;
-      font-weight: 700;
-      font-family: var(--font-display);
-      padding: 14px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .cta-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,245,212,0.4);
-    }
-    .cta-secondary {
-      border: 1.5px solid var(--glass-border);
-      color: var(--text);
-      font-family: var(--font-display);
-      padding: 14px 32px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      background: var(--glass);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-    }
-    .cta-secondary:hover {
-      border-color: var(--magenta);
-      color: var(--magenta);
-      transform: translateY(-3px);
-    }
+position:fixed;
+top:0;
+left:0;
+right:0;
 
-    /* stats bar */
-    .stats-bar {
-      display: flex;
-      gap: 40px;
-      margin-top: 52px;
-      padding-top: 32px;
-      border-top: 1px solid var(--glass-border);
-      opacity:0;
-      animation: slideUp 0.7s ease forwards 1.2s;
-    }
-    .stat-item { text-align:center; }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2.4rem;
-      font-weight: 800;
-      line-height: 1;
-      background: linear-gradient(135deg, var(--teal), var(--lime));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
+display:flex;
+justify-content:space-between;
+align-items:center;
 
-    /* hero right - skill orbs */
-    .hero-right {
-      flex-shrink:0;
-      position:relative;
-      width:340px; height:340px;
-      opacity:0;
-      animation: popIn 0.8s cubic-bezier(0.175,0.885,0.32,1.275) forwards 1s;
-    }
-    .orb-center {
-      position:absolute;
-      top:50%; left:50%;
-      transform:translate(-50%,-50%);
-      width:120px; height:120px;
-      border-radius:50%;
-      background: linear-gradient(135deg, var(--teal), var(--magenta));
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display);
-      font-weight:800; font-size:0.85rem;
-      color:#000; text-align:center; line-height:1.3;
-      box-shadow: 0 0 60px rgba(0,245,212,0.4);
-      animation: pulse 3s ease-in-out infinite;
-      z-index:3;
-    }
-    @keyframes pulse {
-      0%,100%{box-shadow:0 0 40px rgba(0,245,212,0.4);}
-      50%{box-shadow:0 0 80px rgba(247,37,133,0.5);}
-    }
-    .orb-ring {
-      position:absolute;
-      top:50%; left:50%;
-      border-radius:50%;
-      border: 1px dashed rgba(255,255,255,0.1);
-      transform:translate(-50%,-50%);
-    }
-    .orb-ring:nth-child(2){width:200px;height:200px;animation:spin 20s linear infinite;}
-    .orb-ring:nth-child(3){width:300px;height:300px;animation:spin 30s linear infinite reverse;}
-    @keyframes spin{ to{transform:translate(-50%,-50%) rotate(360deg);} }
+padding:20px 60px;
 
-    .skill-orb {
-      position:absolute;
-      padding:6px 14px;
-      border-radius:999px;
-      font-family:var(--font-mono);
-      font-size:0.72rem;
-      font-weight:500;
-      white-space:nowrap;
-      border:1px solid;
-      backdrop-filter:blur(8px);
-    }
-    .so1{top:2%;  left:50%; transform:translateX(-50%); color:var(--teal);    border-color:var(--teal);    background:rgba(0,245,212,0.1);}
-    .so2{top:18%; right:0%;                               color:var(--orange);  border-color:var(--orange);  background:rgba(255,107,53,0.1);}
-    .so3{bottom:18%;right:0%;                             color:var(--blue);   border-color:var(--blue);    background:rgba(76,201,240,0.1);}
-    .so4{bottom:2%;left:50%; transform:translateX(-50%); color:var(--lime);   border-color:var(--lime);    background:rgba(181,232,83,0.1);}
-    .so5{bottom:18%;left:0%;                              color:var(--magenta);border-color:var(--magenta); background:rgba(247,37,133,0.1);}
-    .so6{top:18%;  left:0%;                               color:var(--purple); border-color:var(--purple);  background:rgba(114,9,183,0.2);}
+background:rgba(8,12,20,0.7);
+backdrop-filter:blur(12px);
 
-    /* ===== SECTION BASE ===== */
-    section { position:relative; z-index:2; padding:100px 48px; }
-    .sec-label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .sec-title {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 56px;
-    }
-    .container { max-width:1100px; margin:0 auto; }
+border-bottom:1px solid var(--glass-border);
 
-    /* ===== SKILLS SECTION ===== */
-    #skills { background: rgba(0,0,0,0.3); }
-    .skills-mosaic {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-    .skill-tile {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 28px;
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-    }
-    .skill-tile::before {
-      content:'';
-      position:absolute;
-      top:-60px; right:-60px;
-      width:120px; height:120px;
-      border-radius:50%;
-      opacity:0.15;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    .skill-tile:hover { transform:translateY(-6px); }
-    .skill-tile:hover::before { opacity:0.3; transform:scale(1.3); }
+z-index:100;
 
-    .st-teal    ::before,.st-teal    { --tc:var(--teal);    }
-    .st-orange  { --tc:var(--orange);  }
-    .st-magenta { --tc:var(--magenta); }
-    .st-blue    { --tc:var(--blue);    }
-    .st-lime    { --tc:var(--lime);    }
-    .st-purple  { --tc:var(--purple);  }
+}
 
-    .skill-tile:hover { border-color: var(--tc, var(--teal)); box-shadow: 0 8px 40px rgba(0,0,0,0.3); }
-    .st-teal::before    { background:var(--teal); }
-    .st-orange::before  { background:var(--orange); }
-    .st-magenta::before { background:var(--magenta); }
-    .st-blue::before    { background:var(--blue); }
-    .st-lime::before    { background:var(--lime); }
-    .st-purple::before  { background:var(--purple); }
+.logo{
 
-    .tile-icon { font-size:2.2rem; margin-bottom:14px; }
-    .tile-title {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-    .tile-tags { display:flex; flex-wrap:wrap; gap:6px; }
-    .tile-tag {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      padding: 3px 9px;
-      border-radius: 4px;
-      background: rgba(255,255,255,0.06);
-      color: var(--muted);
-      transition: color 0.2s, background 0.2s;
-    }
-    .skill-tile:hover .tile-tag { color: #fff; }
+font-family:var(--font-display);
+font-weight:800;
+font-size:22px;
 
-    /* ===== EXPERIENCE ===== */
-    #experience { }
-    .exp-grid { display:flex; flex-direction:column; gap:24px; }
-    .exp-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 36px;
-      backdrop-filter: blur(12px);
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 20px;
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .exp-card::after {
-      content:'';
-      position:absolute;
-      left:0; top:0; bottom:0;
-      width:4px;
-      border-radius:4px 0 0 4px;
-    }
-    .exp-card:nth-child(1)::after { background:linear-gradient(to bottom, var(--teal), var(--blue)); }
-    .exp-card:nth-child(2)::after { background:linear-gradient(to bottom, var(--orange), var(--magenta)); }
-    .exp-card:nth-child(3)::after { background:linear-gradient(to bottom, var(--lime), var(--teal)); }
-    .exp-card:hover { transform:translateX(8px); border-color:rgba(255,255,255,0.2); }
+background:linear-gradient(90deg,var(--teal),var(--magenta));
 
-    .exp-role {
-      font-family: var(--font-display);
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .exp-company {
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      margin-bottom: 18px;
-    }
-    .exp-card:nth-child(1) .exp-company { color:var(--teal); }
-    .exp-card:nth-child(2) .exp-company { color:var(--orange); }
-    .exp-card:nth-child(3) .exp-company { color:var(--lime); }
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 
-    .exp-date {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      padding: 6px 16px;
-      border-radius: 999px;
-      white-space:nowrap;
-      height: fit-content;
-    }
-    .exp-card:nth-child(1) .exp-date { background:rgba(0,245,212,0.1); color:var(--teal); border:1px solid rgba(0,245,212,0.3); }
-    .exp-card:nth-child(2) .exp-date { background:rgba(255,107,53,0.1); color:var(--orange); border:1px solid rgba(255,107,53,0.3); }
-    .exp-card:nth-child(3) .exp-date { background:rgba(181,232,83,0.1); color:var(--lime); border:1px solid rgba(181,232,83,0.3); }
+}
 
-    .exp-list { list-style:none; display:flex; flex-direction:column; gap:8px; }
-    .exp-list li {
-      color: var(--muted);
-      font-size: 0.88rem;
-      padding-left: 18px;
-      position: relative;
-      line-height:1.6;
-    }
-    .exp-list li::before {
-      content:'◆';
-      position:absolute; left:0;
-      font-size:0.5rem;
-      top:6px;
-    }
-    .exp-card:nth-child(1) .exp-list li::before { color:var(--teal); }
-    .exp-card:nth-child(2) .exp-list li::before { color:var(--orange); }
-    .exp-card:nth-child(3) .exp-list li::before { color:var(--lime); }
+.nav-links{
 
-    /* ===== EDUCATION ===== */
-    #education { background:rgba(0,0,0,0.3); }
-    .edu-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .edu-tile {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 28px 22px;
-      text-align: center;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s;
-      position: relative;
-      overflow:hidden;
-    }
-    .edu-tile:hover { transform:translateY(-6px); }
-    .edu-glow {
-      position:absolute;
-      bottom:-40px; left:50%;
-      transform:translateX(-50%);
-      width:100px; height:100px;
-      border-radius:50%;
-      filter:blur(30px);
-      opacity:0.25;
-      transition:opacity 0.3s;
-    }
-    .edu-tile:hover .edu-glow { opacity:0.5; }
-    .eg-teal    { background:var(--teal); }
-    .eg-blue    { background:var(--blue); }
-    .eg-orange  { background:var(--orange); }
-    .eg-magenta { background:var(--magenta); }
-    .eg-lime    { background:var(--lime); }
+display:flex;
+gap:30px;
+list-style:none;
 
-    .edu-icon { font-size:2.2rem; margin-bottom:12px; position:relative; z-index:1; }
-    .edu-tile h3 { font-family:var(--font-display); font-size:0.95rem; font-weight:700; margin-bottom:6px; position:relative;z-index:1; }
-    .edu-tile p  { color:var(--muted); font-size:0.78rem; margin-bottom:12px; position:relative;z-index:1; }
-    .edu-chip {
-      display:inline-block;
-      padding:3px 12px;
-      border-radius:999px;
-      font-family:var(--font-mono);
-      font-size:0.7rem;
-      position:relative;z-index:1;
-    }
-    .chip-teal    { background:rgba(0,245,212,0.12); color:var(--teal); border:1px solid rgba(0,245,212,0.3); }
-    .chip-blue    { background:rgba(76,201,240,0.12); color:var(--blue); border:1px solid rgba(76,201,240,0.3); }
-    .chip-orange  { background:rgba(255,107,53,0.12); color:var(--orange); border:1px solid rgba(255,107,53,0.3); }
-    .chip-magenta { background:rgba(247,37,133,0.12); color:var(--magenta); border:1px solid rgba(247,37,133,0.3); }
-    .chip-lime    { background:rgba(181,232,83,0.12); color:var(--lime); border:1px solid rgba(181,232,83,0.3); }
+}
 
-    /* ===== CONTACT ===== */
-    #contact { }
-    .contact-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    .contact-info h2 {
-      font-family: var(--font-display);
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing:-1.5px;
-      margin-bottom:16px;
-    }
-    .contact-info p { color:var(--muted); line-height:1.8; max-width:400px; margin-bottom:32px; }
+.nav-links a{
 
-    .contact-cards { display:flex; flex-direction:column; gap:14px; }
-    .c-card {
-      background:var(--glass);
-      border:1px solid var(--glass-border);
-      border-radius:12px;
-      padding:18px 22px;
-      display:flex; align-items:center; gap:16px;
-      backdrop-filter:blur(10px);
-      text-decoration:none;
-      transition:all 0.3s;
-    }
-    .c-card:hover { transform:translateX(8px); border-color:var(--teal); }
-    .c-icon { font-size:1.6rem; flex-shrink:0; }
-    .c-label { font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
-    .c-value { color:var(--text); font-size:0.9rem; font-weight:600; margin-top:2px; }
+text-decoration:none;
+color:var(--muted);
+font-family:var(--font-mono);
+font-size:13px;
+letter-spacing:1px;
 
-    .lang-row { margin-top:32px; }
-    .lang-row h4 { font-family:var(--font-mono); font-size:0.75rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; }
-    .lang-chips { display:flex; gap:10px; }
-    .lang-chip {
-      padding:6px 18px;
-      border-radius:999px;
-      font-family:var(--font-mono);
-      font-size:0.78rem;
-    }
+}
 
-    /* ===== FOOTER ===== */
-    footer {
-      position:relative; z-index:2;
-      text-align:center;
-      padding:40px 48px;
-      border-top:1px solid var(--glass-border);
-      background:rgba(0,0,0,0.4);
-    }
-    .footer-logo {
-      font-family:var(--font-display);
-      font-size:1.6rem;
-      font-weight:800;
-      background:linear-gradient(90deg,var(--teal),var(--magenta),var(--orange));
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      margin-bottom:12px;
-    }
-    footer p { color:var(--muted); font-size:0.82rem; }
+.nav-links a:hover{
 
-    /* ===== ANIMATIONS ===== */
-    @keyframes slideUp {
-      from { opacity:0; transform:translateY(30px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    @keyframes popIn {
-      from { opacity:0; transform:scale(0.7); }
-      to   { opacity:1; transform:scale(1); }
-    }
+color:white;
 
-    /* scroll reveal */
-    .reveal {
-      opacity:0;
-      transform:translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible { opacity:1; transform:translateY(0); }
+}
 
-    /* ===== RESPONSIVE ===== */
-    @media(max-width:900px){
-      .hero { flex-direction:column; padding:110px 24px 60px; text-align:center; }
-      .hero-right { display:none; }
-      .stats-bar { justify-content:center; }
-      .cta-group { justify-content:center; }
-      .skills-mosaic { grid-template-columns:1fr 1fr; }
-      .contact-wrap { grid-template-columns:1fr; }
-      nav { padding:14px 24px; }
-      .nav-links { display:none; }
-      .nav-links.open {
-        display:flex; flex-direction:column;
-        position:absolute; top:60px; left:0; right:0;
-        background:rgba(8,12,20,0.97);
-        padding:20px; gap:16px;
-        border-bottom:1px solid var(--glass-border);
-      }
-      .hamburger { display:block; }
-      section { padding:70px 24px; }
-    }
-    @media(max-width:600px){
-      .skills-mosaic { grid-template-columns:1fr; }
-      .edu-row { grid-template-columns:1fr 1fr; }
-      .exp-card { grid-template-columns:1fr; }
-    }
-  </style>
+
+/* ================= HERO ================= */
+
+.hero{
+
+min-height:100vh;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+padding:120px 60px;
+
+gap:80px;
+
+}
+
+
+.hero-left{
+
+flex:1;
+
+max-width:650px;
+
+}
+
+
+/* NAME */
+
+.hero-name{
+
+font-family:var(--font-display);
+font-weight:800;
+
+font-size:clamp(48px,7vw,95px);
+
+line-height:1.05;
+
+letter-spacing:-2px;
+
+margin-bottom:20px;
+
+}
+
+.line1{
+
+display:block;
+color:white;
+
+}
+
+.line2{
+
+display:block;
+
+background:linear-gradient(
+90deg,
+var(--teal),
+var(--blue),
+var(--magenta)
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+
+}
+
+
+/* ROLE */
+
+.hero-role{
+
+font-family:var(--font-mono);
+color:var(--orange);
+
+letter-spacing:3px;
+font-size:14px;
+
+margin-bottom:20px;
+
+}
+
+
+/* BIO */
+
+.hero-bio{
+
+color:var(--muted);
+
+line-height:1.7;
+
+margin-bottom:35px;
+
+max-width:500px;
+
+}
+
+
+/* BUTTONS */
+
+.cta-group{
+
+display:flex;
+gap:15px;
+
+}
+
+.btn{
+
+padding:14px 28px;
+
+border-radius:8px;
+
+text-decoration:none;
+
+font-family:var(--font-display);
+font-weight:700;
+
+}
+
+.btn-primary{
+
+background:linear-gradient(135deg,var(--teal),var(--blue));
+color:black;
+
+}
+
+.btn-primary:hover{
+
+transform:translateY(-3px);
+
+}
+
+.btn-secondary{
+
+border:1px solid var(--glass-border);
+color:white;
+
+}
+
+.btn-secondary:hover{
+
+border-color:var(--magenta);
+color:var(--magenta);
+
+}
+
+
+/* RIGHT SIDE ORB */
+
+.hero-right{
+
+width:300px;
+height:300px;
+
+position:relative;
+
+}
+
+.center-orb{
+
+position:absolute;
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+width:130px;
+height:130px;
+
+border-radius:50%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-family:var(--font-display);
+font-weight:800;
+
+background:linear-gradient(135deg,var(--teal),var(--magenta));
+
+color:black;
+
+box-shadow:0 0 40px rgba(0,245,212,0.5);
+
+}
+
+
+/* ================= SECTION ================= */
+
+section{
+
+padding:80px 60px;
+
+}
+
+.container{
+
+max-width:1100px;
+margin:auto;
+
+}
+
+.section-title{
+
+font-family:var(--font-display);
+
+font-size:40px;
+
+margin-bottom:40px;
+
+}
+
+
+/* ================= SKILLS ================= */
+
+.skills{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+.skill{
+
+padding:25px;
+
+border-radius:12px;
+
+background:var(--glass);
+
+border:1px solid var(--glass-border);
+
+}
+
+.skill:hover{
+
+border-color:var(--teal);
+
+}
+
+.skill h3{
+
+margin-bottom:10px;
+
+font-family:var(--font-display);
+
+}
+
+
+/* ================= CONTACT ================= */
+
+.contact-box{
+
+padding:30px;
+
+background:var(--glass);
+
+border:1px solid var(--glass-border);
+
+border-radius:12px;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+footer{
+
+text-align:center;
+
+padding:30px;
+
+border-top:1px solid var(--glass-border);
+
+color:var(--muted);
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+.hero{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+.hero-right{
+
+display:none;
+
+}
+
+.cta-group{
+
+justify-content:center;
+
+}
+
+}
+
+</style>
+
 </head>
 <body>
 
-<!-- AURORA -->
-<div class="aurora">
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-  <div class="aurora-blob"></div>
-</div>
 
 <!-- NAV -->
+
 <nav>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger">☰</div>
+
+<div class="logo">Ramchandra</div>
+
+<ul class="nav-links">
+
+<li><a href="#skills">Skills</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
 </nav>
 
-<div class="page">
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-center left">
-      <div class="badge-row">
-        <span class="badge badge-teal">System Administrator</span>
-        <span class="badge badge-orange">Pune, India</span>
-        <span class="badge badge-magenta">7+ Years Exp.</span>
-      </div>
-      <h1 class="hero-name">
-        <span class="line1">Ramchandra</span>
-        <span class="line2">Deshmukh</span>
-      </h1>
-      <p class="hero-role">// Windows · Networks · Virtualization</p>
-      <p class="hero-bio">Experienced System Administrator specializing in Windows Server infrastructure, Active Directory, network configuration, and VMware virtualization. Keeping systems running, secure, and optimized.</p>
-      <div class="cta-group">
-        <a href="#contact" class="cta-primary">Get In Touch</a>
-        <a href="#experience" class="cta-secondary">View My Work</a>
-      </div>
-      <div class="stats-bar">
-        <div class="stat-item"><div class="stat-num">7+</div><div class="stat-label">Years Exp.</div></div>
-        <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Certifications</div></div>
-        <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Companies</div></div>
-        <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">SLA Focus</div></div>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="orb-ring"></div>
-      <div class="orb-ring"></div>
-      <div class="orb-center">SYS<br/>ADMIN</div>
-      <div class="skill-orb so1">Active Directory</div>
-      <div class="skill-orb so2">Windows Server</div>
-      <div class="skill-orb so3">VMware vSphere</div>
-      <div class="skill-orb so4">DNS & DHCP</div>
-      <div class="skill-orb so5">Group Policy</div>
-      <div class="skill-orb so6">IIS & FTP</div>
-    </div>
-  </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="container">
-      <p class="sec-label reveal" style="color:var(--teal)">// 02. Technical Arsenal</p>
-      <h2 class="sec-title reveal">What I <span style="background:linear-gradient(90deg,var(--teal),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Work With</span></h2>
-      <div class="skills-mosaic">
-        <div class="skill-tile st-teal reveal">
-          <div class="tile-icon">🖥️</div>
-          <div class="tile-title" style="color:var(--teal)">Operating Systems</div>
-          <div class="tile-tags">
-            <span class="tile-tag">Windows Server 2012</span>
-            <span class="tile-tag">Windows Server 2016</span>
-            <span class="tile-tag">Red Hat 6 & 7</span>
-            <span class="tile-tag">Windows 7 / 10</span>
-          </div>
-        </div>
-        <div class="skill-tile st-magenta reveal">
-          <div class="tile-icon">🔐</div>
-          <div class="tile-title" style="color:var(--magenta)">Directory & Identity</div>
-          <div class="tile-tags">
-            <span class="tile-tag">Active Directory</span>
-            <span class="tile-tag">Group Policy (GPO)</span>
-            <span class="tile-tag">FSMO Roles</span>
-            <span class="tile-tag">DFS Namespace</span>
-            <span class="tile-tag">AD Manager</span>
-          </div>
-        </div>
-        <div class="skill-tile st-orange reveal">
-          <div class="tile-icon">🌐</div>
-          <div class="tile-title" style="color:var(--orange)">Networking & Services</div>
-          <div class="tile-tags">
-            <span class="tile-tag">DNS</span>
-            <span class="tile-tag">DHCP</span>
-            <span class="tile-tag">DHCP Failover</span>
-            <span class="tile-tag">AD Failover</span>
-            <span class="tile-tag">IP Addressing</span>
-            <span class="tile-tag">Subnetting</span>
-          </div>
-        </div>
-        <div class="skill-tile st-blue reveal">
-          <div class="tile-icon">☁️</div>
-          <div class="tile-title" style="color:var(--blue)">Virtualization & Web</div>
-          <div class="tile-tags">
-            <span class="tile-tag">VMware vSphere</span>
-            <span class="tile-tag">IIS 7</span>
-            <span class="tile-tag">FTP Server</span>
-            <span class="tile-tag">WDS</span>
-            <span class="tile-tag">FSRM</span>
-          </div>
-        </div>
-        <div class="skill-tile st-lime reveal">
-          <div class="tile-icon">🛡️</div>
-          <div class="tile-title" style="color:var(--lime)">Support & Security</div>
-          <div class="tile-tags">
-            <span class="tile-tag">Antivirus Mgmt</span>
-            <span class="tile-tag">Smart Card Systems</span>
-            <span class="tile-tag">SLA Management</span>
-            <span class="tile-tag">Ticketing Tools</span>
-            <span class="tile-tag">LAN Config</span>
-          </div>
-        </div>
-        <div class="skill-tile st-purple reveal">
-          <div class="tile-icon">💡</div>
-          <div class="tile-title" style="color:var(--purple)">Soft Skills</div>
-          <div class="tile-tags">
-            <span class="tile-tag">Team Leadership</span>
-            <span class="tile-tag">Problem Solving</span>
-            <span class="tile-tag">Analytical Thinking</span>
-            <span class="tile-tag">Client Relations</span>
-            <span class="tile-tag">Project Management</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="container">
-      <p class="sec-label reveal" style="color:var(--orange)">// 03. Career Journey</p>
-      <h2 class="sec-title reveal">Work <span style="background:linear-gradient(90deg,var(--orange),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Experience</span></h2>
-      <div class="exp-grid">
+<section class="hero">
 
-        <div class="exp-card reveal">
-          <div>
-            <div class="exp-role">System Administrator</div>
-            <div class="exp-company">Senses Electronics PVT LTD</div>
-            <ul class="exp-list">
-              <li>Managed DHCP Failover, AD Failover, DFS Namespace & Replication</li>
-              <li>Administered FSRM, WDS, DHCP Relay Agent, Schema, and IIS</li>
-              <li>Configured Group Policy across Windows Server 2008 & 2012</li>
-              <li>Handled incident & service request tickets maintaining strict SLAs</li>
-              <li>Managed users via AD Manager — bulk create, delete, and move</li>
-              <li>Maintained FTP sites, web servers, and IIS7 hosted sites</li>
-              <li>Configured multiple IP addresses for forwarding and dynamic routing</li>
-            </ul>
-          </div>
-          <div class="exp-date">Jul 2019 – Present</div>
-        </div>
+<div class="hero-left">
 
-        <div class="exp-card reveal">
-          <div>
-            <div class="exp-role">Desktop / Technical Support Engineer</div>
-            <div class="exp-company">Senses Electronics PVT LTD</div>
-            <ul class="exp-list">
-              <li>Administered network & local printers</li>
-              <li>Managed Smart Card certificate server systems</li>
-              <li>Supported Android & Windows devices for Outlook email sync</li>
-              <li>Installed, configured, and troubleshot Microsoft Office 2007/10/13</li>
-              <li>Handled virus & spyware remediation on remote workstations</li>
-            </ul>
-          </div>
-          <div class="exp-date">Jul 2018 – Jul 2019</div>
-        </div>
+<h1 class="hero-name">
 
-        <div class="exp-card reveal">
-          <div>
-            <div class="exp-role">Desktop Support Engineer</div>
-            <div class="exp-company">Autoqed Technologies PVT LTD</div>
-            <ul class="exp-list">
-              <li>Hardware & software installation and troubleshooting</li>
-              <li>Windows 7/10 installation, configuration, and issue resolution</li>
-              <li>LAN cable creation and network troubleshooting</li>
-              <li>File/folder permission management and asset management</li>
-              <li>Antivirus installation and definition updates</li>
-            </ul>
-          </div>
-          <div class="exp-date">2017 – Jul 2018</div>
-        </div>
+<span class="line1">Ramchandra</span>
 
-      </div>
-    </div>
-  </section>
+<span class="line2">Deshmukh</span>
 
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="container">
-      <p class="sec-label reveal" style="color:var(--blue)">// 04. Qualifications</p>
-      <h2 class="sec-title reveal">Education & <span style="background:linear-gradient(90deg,var(--blue),var(--lime));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Training</span></h2>
-      <div class="edu-row">
+</h1>
 
-        <div class="edu-tile reveal">
-          <div class="edu-glow eg-teal"></div>
-          <div class="edu-icon">🎓</div>
-          <h3>MSC Software Engineering</h3>
-          <p>SRTMUN Nanded University</p>
-          <span class="edu-chip chip-teal">2015</span>
-        </div>
+<div class="hero-role">
 
-        <div class="edu-tile reveal">
-          <div class="edu-glow eg-blue"></div>
-          <div class="edu-icon">🎓</div>
-          <h3>Bachelor of Computer Science</h3>
-          <p>SRTMUN Nanded University</p>
-          <span class="edu-chip chip-blue">2012</span>
-        </div>
+SYSTEM ADMINISTRATOR
 
-        <div class="edu-tile reveal">
-          <div class="edu-glow eg-orange"></div>
-          <div class="edu-icon">📜</div>
-          <h3>MCSE 2012</h3>
-          <p>ZOOM Technology, Hyderabad</p>
-          <span class="edu-chip chip-orange">Certified</span>
-        </div>
+</div>
 
-        <div class="edu-tile reveal">
-          <div class="edu-glow eg-magenta"></div>
-          <div class="edu-icon">🐧</div>
-          <h3>Red Hat 6 & 7 CMS</h3>
-          <p>Training Institute, Pune</p>
-          <span class="edu-chip chip-magenta">Certified</span>
-        </div>
+<div class="hero-bio">
 
-        <div class="edu-tile reveal">
-          <div class="edu-glow eg-lime"></div>
-          <div class="edu-icon">☁️</div>
-          <h3>VMware vSphere</h3>
-          <p>ZOOM Technology, Hyderabad</p>
-          <span class="edu-chip chip-lime">Certified</span>
-        </div>
+Experienced System Administrator specializing in Windows Server, Active Directory, VMware, IIS, and enterprise infrastructure.
 
-      </div>
-    </div>
-  </section>
+</div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="contact-wrap">
-        <div class="contact-info reveal">
-          <p class="sec-label" style="color:var(--magenta)">// 05. Get In Touch</p>
-          <h2>Let's <span style="background:linear-gradient(90deg,var(--magenta),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Connect</span></h2>
-          <p>Open to new opportunities in System Administration, IT Infrastructure, and DevOps. Feel free to reach out for work or collaboration!</p>
-          <div class="lang-row">
-            <h4>Languages</h4>
-            <div class="lang-chips">
-              <span class="lang-chip chip-teal">Marathi</span>
-              <span class="lang-chip chip-blue">Hindi</span>
-              <span class="lang-chip chip-orange">English</span>
-            </div>
-          </div>
-        </div>
-        <div class="contact-cards reveal">
-          <a href="mailto:Ramchandra.d62@gmail.com" class="c-card">
-            <span class="c-icon">📧</span>
-            <div><div class="c-label">Email</div><div class="c-value">Ramchandra.d62@gmail.com</div></div>
-          </a>
-          <a href="tel:+919420796075" class="c-card">
-            <span class="c-icon">📱</span>
-            <div><div class="c-label">Phone</div><div class="c-value">+91-9420796075</div></div>
-          </a>
-           <div class="c-card">
-            <span class="c-icon">📍</span>
-            <div><div class="c-label">Location</div><div class="c-value">Vanalika Wing 1A Flat no 602 Pirangut, Pune – 412115</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div class="cta-group">
 
-  <footer>
-    <div class="footer-logo">Ramchandra Deshmukh</div>
-    <p>System Administrator · Pune, India · © 2026</p>
-    <p style="margin-top:8px;font-family:'DM Mono',monospace;font-size:0.75rem;color:#334;color:rgba(255,255,255,0.15)">&lt;/portfolio&gt;</p>
-  </footer>
+<a href="#contact" class="btn btn-primary">Contact Me</a>
 
-</div><!-- end .page -->
+<a href="#skills" class="btn btn-secondary">View Skills</a>
 
-<script>
-  // Hamburger
-  const ham = document.getElementById('hamburger');
-  const nav = document.getElementById('navLinks');
-  ham.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+</div>
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        e.target.style.transitionDelay = `${(i % 4) * 80}ms`;
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-  revealEls.forEach(el => io.observe(el));
+</div>
 
-  // Active nav highlight
-  const sections = document.querySelectorAll('section[id]');
-  const navAs = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let cur = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-    navAs.forEach(a => {
-      a.style.color = '';
-      if (a.getAttribute('href') === `#${cur}`) a.style.color = '#00f5d4';
-    });
-  });
-</script>
+
+<div class="hero-right">
+
+<div class="center-orb">
+
+SYS ADMIN
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section id="skills">
+
+<div class="container">
+
+<div class="section-title">
+
+Skills
+
+</div>
+
+<div class="skills">
+
+<div class="skill">
+
+<h3>Windows Server</h3>
+
+Active Directory, DNS, DHCP, GPO
+
+</div>
+
+<div class="skill">
+
+<h3>Virtualization</h3>
+
+VMware vSphere, Hyper-V
+
+</div>
+
+<div class="skill">
+
+<h3>Networking</h3>
+
+IP, Routing, LAN, Troubleshooting
+
+</div>
+
+<div class="skill">
+
+<h3>Web Services</h3>
+
+IIS, FTP, Hosting
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="section-title">
+
+Contact
+
+</div>
+
+<div class="contact-box">
+
+Email: your@email.com<br><br>
+
+Location: Pune, India
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 Ramchandra Deshmukh | System Administrator
+
+</footer>
+
+
 </body>
 </html>
